@@ -68,7 +68,7 @@ int format_printf(const callendar_t call)
 }
 int main(int argc,char** argv)
 {
-	callendar_t call;
+//	callendar_t call;
 	char* parametr = NULL;
 	if(argc < 2){
 		ccal_printf("Invalid Parameters\n");
@@ -76,9 +76,9 @@ int main(int argc,char** argv)
 	}
 	parametr =  argv[1];
 	ccal_printf("Input: %s",parametr);
-	if(!parse(parametr,&call)){
-		ccal_printf("Parsed: %02d : %04d",call.m,call.y);
-		format_printf(call);
-	}
+//	if(!parse(parametr,&call)){
+//		ccal_printf("Parsed: %02d : %04d",call.m,call.y);
+//		format_printf(call);
+//	}
 	return 0;
 }
