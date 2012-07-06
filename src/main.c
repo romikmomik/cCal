@@ -4,6 +4,8 @@
 #include <time.h>
 #include <langinfo.h>
 
+#include "ccal_log.h"
+
 typedef struct _callendar_t callendar_t;
 struct _callendar_t
 {
@@ -15,11 +17,11 @@ int parse(const char* par, callendar_t * call)
 {
 	int error = 0;
 	if((!call)&&(!par)){
-		printf("Invalid parameters\n");
+		ccal_printf("Invalid parameters");
 		return -1;
 	}
 	if(strlen(par)!=7){
-	 	printf("Invalid parameters\n");
+	 	ccal_printf("Invalid parameters");
                 return -1;
 	}
 
@@ -28,7 +30,7 @@ int parse(const char* par, callendar_t * call)
 	    (12<call->m)||
 	    (call->y<1900)|| error < 2 )
 	{
-		printf("Invalid parameters\n");
+		ccal_printf("Invalid parameters");
 		return -2;
 	}
 	return 0;
@@ -45,8 +47,8 @@ int format_printf(const callendar_t call)
 	tm_date->tm_year = call.y - 1900;
 	tm_date->tm_mon = call.m - 1;
 	mktime (tm_date);
-	printf("locale = %s \n",locale);
-	printf("TIME = %s \n",asctime(tm_date)); 
+	ccal_printf("locale = %s",locale);
+//	ccal_printf("TIME = %s \n",asctime(tm_date)); 
 	{
 		int i = 0;
 	{
@@ -54,7 +56,7 @@ int format_printf(const callendar_t call)
 		long week_1stday_l 	= 0;
 		first_weekday =* nl_langinfo (_NL_TIME_FIRST_WEEKDAY);
 		week_1stday_l = (long) nl_langinfo (_NL_TIME_WEEK_1STDAY);
-		printf("%d %d\n",first_weekday,week_1stday_l);
+		ccal_printf("%d %d",first_weekday,week_1stday_l);
         }
 		for(;i<7;i++)
 		{
@@ -69,13 +71,13 @@ int main(int argc,char** argv)
 	callendar_t call;
 	char* parametr = NULL;
 	if(argc < 2){
-		printf("Invalid Parameters\n");
+		ccal_printf("Invalid Parameters\n");
 		return -1;
 	}
 	parametr =  argv[1];
-	printf("Input: %s\n",parametr);
+	ccal_printf("Input: %s",parametr);
 	if(!parse(parametr,&call)){
-		printf("Parsed: %02d : %04d \n",call.m,call.y);
+		ccal_printf("Parsed: %02d : %04d",call.m,call.y);
 		format_printf(call);
 	}
 	return 0;

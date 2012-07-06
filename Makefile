@@ -1,8 +1,11 @@
 CC  = gcc
 CXX = g++
 STRIP = strip
-RM = rm -rf 
-#CFLAGS = -o2
+RM = rm -rf
+CFLAGS	= -std=c99 -DDEBUG
+CFLAGS	+= -I./include
+ 
+#CFLAGS  += 
 #LDFLAGS ?= 
 
 SRC_DIR 	= src
