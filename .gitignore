@@ -3,6 +3,7 @@
 *.lo
 *.o
 *.d
+cCal
 
 # Compiled Dynamic libraries
 *.so
